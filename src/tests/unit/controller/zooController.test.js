@@ -66,6 +66,69 @@ describe("zooController", () => {
     ]);
   });
 
+  test("Update animal with valid data", () => {
+    req.params.id = 2;
+    req.body = {
+      species: "Kitty cat",
+      name: "Kitty Softpaws",
+      age: 14,
+      habitat: "Savannah",
+    };
+
+    zooController.updateAnimal(req, res);
+
+    const data = res._getJSONData();
+    expect(data).toEqual({ message: "Animal updated" });
+  });
+
+  // todo add test for getById 2
+
+  test("Update animal with invalid id", () => {
+    req.params.id = -213;
+    req.body = {
+      species: "Kitty cat",
+      name: "Kitty Softpaws",
+      age: 14,
+      habitat: "Savannah",
+    };
+
+    zooController.updateAnimal(req, res);
+
+    const data = res._getJSONData();
+    expect(data).toEqual({
+      error: "Animal not found with that id, unable to update",
+    });
+  });
+
+  test("Update animal with missing data", () => {
+    req.params.id = 2;
+    req.body = {
+      species: "Kitty cat",
+      name: "Kitty Softpaws",
+      age: 14,
+    };
+
+    zooController.updateAnimal(req, res);
+
+    const data = res._getJSONData();
+    expect(data).toEqual({ error: "Missing required parameters" });
+  });
+
+  test("Update animal with invalid data", () => {
+    req.params.id = 2;
+    req.body = {
+      species: "Kitty cat",
+      name: "Kitty Softpaws",
+      age: -230,
+      habitat: "Savannah",
+    };
+
+    zooController.updateAnimal(req, res);
+
+    const data = res._getJSONData();
+    expect(data).toEqual({ error: "Age must be a positive number" });
+  });
+
   test("Add animal with invalid data", () => {
     req.body = {
       species: "Lion",
