@@ -38,6 +38,18 @@ const getById = (id) => {
   return animals[id] || null;
 };
 
+/**
+ * @param {number} page
+ * @param {number} pageSize
+ * @returns {Array<{species: string, name: string, age: number, habitat: string, id: number}>}
+ */
+const getByPage = (page, pageSize) => {
+  const start = (page - 1) * pageSize;
+  const end = start + pageSize;
+
+  return Object.values(animals).slice(start, end);
+};
+
 const deleteById = (id) => {
   if (animals[id]) {
     delete animals[id];
@@ -52,4 +64,5 @@ module.exports = {
   updateById,
   getById,
   deleteById,
+  getByPage,
 };
