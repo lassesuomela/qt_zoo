@@ -4,6 +4,20 @@ const httpMocks = require("node-mocks-http");
 describe("zooController", () => {
   let req, res;
 
+  const lion = {
+    species: "Lion",
+    name: "King",
+    age: 13,
+    habitat: "Savannah",
+  };
+
+  const cat = {
+    species: "Cat",
+    name: "Puss in Boots",
+    age: 9,
+    habitat: "San Ricardo",
+  };
+
   beforeEach(() => {
     req = httpMocks.createRequest();
     res = httpMocks.createResponse();
@@ -17,12 +31,7 @@ describe("zooController", () => {
   });
 
   test("Add animal with valid data", () => {
-    req.body = {
-      species: "Lion",
-      name: "King",
-      age: 13,
-      habitat: "Savannah",
-    };
+    req.body = lion;
 
     zooController.addAnimal(req, res);
 
@@ -31,12 +40,7 @@ describe("zooController", () => {
   });
 
   test("Add second animal with valid data", () => {
-    req.body = {
-      species: "Cat",
-      name: "Puss in Boots",
-      age: 9,
-      habitat: "San Ricardo",
-    };
+    req.body = cat;
 
     zooController.addAnimal(req, res);
 
