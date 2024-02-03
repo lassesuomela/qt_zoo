@@ -1,8 +1,12 @@
 const express = require("express");
-const app = express();
+const morgan = require("morgan");
 
-app.get("/", function (req, res) {
-  res.send("Hello World");
-});
+const app = express();
+app.use(morgan("combined"));
+app.use(express.json());
+
+const zooRoutes = require("./routes/zooRoutes");
+
+app.use("/animals", zooRoutes);
 
 module.exports = app;
