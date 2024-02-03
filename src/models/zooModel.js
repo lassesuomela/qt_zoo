@@ -1,20 +1,43 @@
-const animals = [];
+const animals = {};
 
 const getAll = () => {
-  return animals;
+  return Object.values(animals);
 };
 
 /**
- *
  * @param {{species: string, name: string, age: number, habitat: string}} animal
  */
 const add = (animal) => {
-  const lastId = animals[animals.length - 1]?.id || 0;
-  animal.id = lastId + 1;
-  animals.push(animal);
+  const newId = Object.keys(animals).length + 1;
+
+  animal.id = newId;
+
+  animals[newId] = animal;
+};
+
+/**
+ * @param {{species: string, name: string, age: number, habitat: string}} animal
+ * @param {number} id
+ */
+const updateById = (animal, id) => {
+  if (animals[id]) {
+    animals[id] = { ...animals[id], ...animal };
+    return true;
+  }
+  return false;
+};
+
+/**
+ * @param {number} id
+ * @returns {{species: string, name: string, age: number, habitat: string} | null}
+ */
+const getById = (id) => {
+  return animals[id] || null;
 };
 
 module.exports = {
   getAll,
   add,
+  updateById,
+  getById,
 };
