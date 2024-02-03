@@ -62,6 +62,11 @@ describe("GET /animals/page/:page", () => {
     expect(page2.body.animals.length).toEqual(1);
     expect(page2.body.animals[0].id).toEqual(6);
   });
+
+  test("Fetch with invalid page number", async () => {
+    const res = await request(app).get("/animals/page/-1").expect(400);
+    expect(res.body).toEqual({ error: "Invalid page number" });
+  });
 });
 
 describe("GET /animals/:id", () => {
