@@ -4,6 +4,16 @@ const getAllAnimals = (req, res) => {
   res.json(zooModel.getAll());
 };
 
+const getById = (req, res) => {
+  const { id } = req.params;
+  const animal = zooModel.getById(id);
+
+  if (animal) {
+    return res.json(animal);
+  }
+  return res.status(404).json({ error: "Animal not found with that id" });
+};
+
 const addAnimal = (req, res) => {
   const { species, name, age, habitat } = req.body;
 
@@ -44,4 +54,5 @@ module.exports = {
   getAllAnimals,
   addAnimal,
   updateAnimal,
+  getById,
 };

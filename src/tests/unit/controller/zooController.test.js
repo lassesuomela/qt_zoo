@@ -81,7 +81,29 @@ describe("zooController", () => {
     expect(data).toEqual({ message: "Animal updated" });
   });
 
-  // todo add test for getById 2
+  test("Get animal by id", () => {
+    req.params.id = 2;
+
+    zooController.getById(req, res);
+
+    const data = res._getJSONData();
+    expect(data).toEqual({
+      species: "Kitty cat",
+      name: "Kitty Softpaws",
+      age: 14,
+      habitat: "Savannah",
+      id: 2,
+    });
+  });
+
+  test("Get animal with non existing id", () => {
+    req.params.id = 123;
+
+    zooController.getById(req, res);
+
+    const data = res._getJSONData();
+    expect(data).toEqual({ error: "Animal not found with that id" });
+  });
 
   test("Update animal with invalid id", () => {
     req.params.id = -213;
