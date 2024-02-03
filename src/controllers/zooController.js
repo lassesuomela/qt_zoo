@@ -42,12 +42,12 @@ const updateAnimal = (req, res) => {
   }
 
   if (zooModel.updateById({ species, name, age, habitat }, id)) {
-    res.json({ message: "Animal updated" });
-  } else {
-    res
-      .status(404)
-      .json({ error: "Animal not found with that id, unable to update" });
+    return res.json({ message: "Animal updated" });
   }
+
+  res
+    .status(404)
+    .json({ error: "Animal not found with that id, unable to update" });
 };
 
 const deleteAnimalById = (req, res) => {
