@@ -189,4 +189,24 @@ describe("zooController", () => {
     const data = res._getJSONData();
     expect(data).toEqual({ error: "Age must be a positive number" });
   });
+
+  test("Delete animal by id", () => {
+    req.params.id = 1;
+
+    zooController.deleteAnimalById(req, res);
+
+    const data = res._getJSONData();
+    expect(data).toEqual({ message: "Animal deleted" });
+  });
+
+  test("Delete animal that has already been deleted", () => {
+    req.params.id = 1;
+
+    zooController.deleteAnimalById(req, res);
+
+    const data = res._getJSONData();
+    expect(data).toEqual({
+      error: "Animal not found with that id, unable to delete",
+    });
+  });
 });
