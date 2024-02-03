@@ -3,6 +3,7 @@ const router = express.Router();
 
 const zooController = require("../controllers/zooController");
 
-router.get("/animals", zooController.getAllAnimals);
+router.get("/", zooController.getAllAnimals);
+router.post("/", zooController.addAnimal);
 
 module.exports = router;
