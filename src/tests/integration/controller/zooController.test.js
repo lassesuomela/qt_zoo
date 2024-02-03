@@ -29,6 +29,41 @@ describe("GET /animals", () => {
   });
 });
 
+describe("GET /animals/page/:page", () => {
+  test("Add animal and fetch all animals", async () => {
+    const body = {
+      species: "Lion",
+      name: "King",
+      age: 13,
+      habitat: "Savannah",
+    };
+
+    for (let index = 0; index < 3; index++) {
+      await request(app).post("/animals").send(body).expect(201);
+    }
+
+    const res = await request(app).get("/animals/page/1").expect(200);
+
+    expect(res.body.animalCount).toEqual(4);
+    expect(res.body.pageSize).toEqual(5);
+    expect(res.body.maxPage).toEqual(1);
+
+    await request(app).post("/animals").send(body).expect(201);
+
+    const page = await request(app).get("/animals/page/1").expect(200);
+
+    expect(page.body.maxPage).toEqual(1);
+
+    await request(app).post("/animals").send(body).expect(201);
+
+    const page2 = await request(app).get("/animals/page/2").expect(200);
+
+    expect(page2.body.maxPage).toEqual(2);
+    expect(page2.body.animals.length).toEqual(1);
+    expect(page2.body.animals[0].id).toEqual(6);
+  });
+});
+
 describe("GET /animals/:id", () => {
   test("Get with data", async () => {
     const res = await request(app).get("/animals/1").expect(200);
