@@ -27,6 +27,8 @@ Some bonus stuff:
 4. Start server with `npm start`
    - Or with nodemon using `npm run dev`
 5. Tests can be ran with jest using `npm test`
+   - This creates `coverage` folder in `./src`
+     - In `./src/coverage/lcov-report/index.html` there is a code coverage report
 
 ## Endpoints
 
@@ -42,3 +44,8 @@ Some bonus stuff:
   request body should include the updated species, name, age, and habitat.
 
 - `DELETE /animals/:id` Deletes a specific animal by its unique identifier.
+
+## Screenshots
+
+Screenshot from code coverage report
+![Code coverage](screenshots/coverage.png)
