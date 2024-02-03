@@ -4,6 +4,27 @@ const getAllAnimals = (req, res) => {
   res.json(zooModel.getAll());
 };
 
+const getAnimalsByPage = (req, res) => {
+  const { page } = req.params;
+
+  if (page < 1) {
+    return res.status(400).json({ error: "Invalid page number" });
+  }
+
+  const pageSize = 5;
+
+  const animals = zooModel.getByPage(page, pageSize);
+
+  const animalCount = zooModel.getAll().length;
+
+  res.json({
+    animals: animals,
+    pageSize: pageSize,
+    animalCount: animalCount,
+    maxPage: Math.ceil(animalCount / pageSize),
+  });
+};
+
 const getById = (req, res) => {
   const { id } = req.params;
   const animal = zooModel.getById(id);
@@ -66,4 +87,5 @@ module.exports = {
   updateAnimal,
   getById,
   deleteAnimalById,
+  getAnimalsByPage,
 };
