@@ -1,5 +1,8 @@
 const animals = {};
 
+/**
+ * @returns {Array<{species: string, name: string, age: number, habitat: string, id: number}>}
+ */
 const getAll = () => {
   return Object.values(animals);
 };
@@ -29,7 +32,7 @@ const updateById = (animal, id) => {
 
 /**
  * @param {number} id
- * @returns {{species: string, name: string, age: number, habitat: string} | null}
+ * @returns {{species: string, name: string, age: number, habitat: string, id: number} | null}
  */
 const getById = (id) => {
   return animals[id] || null;
