@@ -50,9 +50,20 @@ const updateAnimal = (req, res) => {
   }
 };
 
+const deleteAnimalById = (req, res) => {
+  const { id } = req.params;
+  if (zooModel.deleteById(id)) {
+    return res.json({ message: "Animal deleted" });
+  }
+  res
+    .status(404)
+    .json({ error: "Animal not found with that id, unable to delete" });
+};
+
 module.exports = {
   getAllAnimals,
   addAnimal,
   updateAnimal,
   getById,
+  deleteAnimalById,
 };

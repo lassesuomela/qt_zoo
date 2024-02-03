@@ -35,9 +35,18 @@ const getById = (id) => {
   return animals[id] || null;
 };
 
+const deleteById = (id) => {
+  if (animals[id]) {
+    delete animals[id];
+    return true;
+  }
+  return false;
+};
+
 module.exports = {
   getAll,
   add,
   updateById,
   getById,
+  deleteById,
 };
