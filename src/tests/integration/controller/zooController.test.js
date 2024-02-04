@@ -4,7 +4,7 @@ const app = require("../../../app");
 describe("GET /animals", () => {
   test("Get with no data", async () => {
     const res = await request(app).get("/animals").expect(200);
-    expect(res.body).toEqual([]);
+    expect(res.body.animals).toEqual([]);
   });
 
   test("Add animal and fetch all animals", async () => {
@@ -25,7 +25,7 @@ describe("GET /animals", () => {
     const getAllAnimalsRes = await request(app).get("/animals").expect(200);
 
     body.id = 1;
-    expect(getAllAnimalsRes.body).toEqual([body]);
+    expect(getAllAnimalsRes.body.animals).toEqual([body]);
   });
 });
 
@@ -73,7 +73,7 @@ describe("GET /animals/:id", () => {
   test("Get with data", async () => {
     const res = await request(app).get("/animals/1").expect(200);
 
-    expect(res.body).toEqual({
+    expect(res.body.animal).toEqual({
       age: 13,
       habitat: "Savannah",
       id: 1,

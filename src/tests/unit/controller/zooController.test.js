@@ -27,7 +27,7 @@ describe("zooController", () => {
     zooController.getAllAnimals(req, res);
 
     const data = res._getJSONData();
-    expect(data).toEqual([]);
+    expect(data.animals).toEqual([]);
   });
 
   test("Add animal with valid data", () => {
@@ -52,7 +52,7 @@ describe("zooController", () => {
     zooController.getAllAnimals(req, res);
 
     const data = res._getJSONData();
-    expect(data).toEqual([
+    expect(data.animals).toEqual([
       {
         species: "Lion",
         name: "King",
@@ -91,7 +91,7 @@ describe("zooController", () => {
     zooController.getById(req, res);
 
     const data = res._getJSONData();
-    expect(data).toEqual({
+    expect(data.animal).toEqual({
       species: "Kitty cat",
       name: "Kitty Softpaws",
       age: 14,

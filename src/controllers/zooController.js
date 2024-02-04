@@ -1,7 +1,7 @@
 const zooModel = require("../models/zooModel");
 
 const getAllAnimals = (req, res) => {
-  res.json(zooModel.getAll());
+  res.json({ animals: zooModel.getAll() });
 };
 
 const getAnimalsByPage = (req, res) => {
@@ -30,7 +30,7 @@ const getById = (req, res) => {
   const animal = zooModel.getById(id);
 
   if (animal) {
-    return res.json(animal);
+    return res.json({ animal: animal });
   }
   return res.status(404).json({ error: "Animal not found with that id" });
 };
