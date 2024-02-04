@@ -34,7 +34,7 @@ Some bonus stuff:
 
 - `GET /animals` Returns a list of all animals in the zoo.
 
-- `GET /animals/page:page` Returns a list of all animals in the zoo per 5 animal increments using pagination.
+- `GET /animals/page/:page` Returns a list of all animals in the zoo per 5 animal increments using pagination.
 
 - `GET /animals/:id` Returns details of a specific animal by its unique identifier.
 
